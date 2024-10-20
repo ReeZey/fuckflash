@@ -29,7 +29,7 @@ extern "system" fn create_window_ex_hook(
     mut dw_ex_style: u32,
     lp_class_name: *const i8,
     lp_window_name: *const i8,
-    mut dwStyle: u32,
+    mut dw_style: u32,
     mut x: i32,
     mut y: i32,
     mut n_width: i32,
@@ -43,8 +43,8 @@ extern "system" fn create_window_ex_hook(
     unsafe {
         let original = CREATEWINDOW_DETOUR.as_mut().unwrap();
 
-        if dwStyle == 2181038080 {
-            dwStyle = 0x00CF0000;
+        if dw_style == 2181038080 {
+            dw_style = 0x00CF0000;
             dw_ex_style = 0;
 
             n_width = 800;
@@ -57,7 +57,7 @@ extern "system" fn create_window_ex_hook(
         return original.call(dw_ex_style,
             lp_class_name,
             lp_window_name,
-            dwStyle,
+            dw_style,
             x,
             y,
             n_width,
