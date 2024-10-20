@@ -12,10 +12,9 @@ fn main() {
     let exe_path = PathBuf::from(env::current_exe().unwrap());
     let dir_path = exe_path.parent().unwrap();
     let dll_path = dir_path.join("fuckflash.dll");
-
-    let child = Command::new(&args[1])
-        .spawn().unwrap();
-
+    
+    let child = Command::new(&args[1]).spawn().unwrap();
+    
     let pid = child.id();
     println!("started process {}", pid);
     let target_process = OwnedProcess::from_pid(pid).unwrap();
