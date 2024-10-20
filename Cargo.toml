@@ -1,0 +1,18 @@
+[package]
+name = "fuckflash"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "fuckflash"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[[bin]]
+name = "loader"
+path = "src/execute.rs"
+
+[dependencies]
+retour = "0.3.1"
+winapi = "0.3.9"
+dll-syringe = "0.15.2"
