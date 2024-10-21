@@ -14,5 +14,5 @@ path = "src/execute.rs"
 
 [dependencies]
 retour = "0.3.1"
-winapi = "0.3.9"
+winapi = { version = "0.3.9", features = ["consoleapi"] }
 dll-syringe = "0.15.2"
