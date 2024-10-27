@@ -5,7 +5,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 2 {
-        println!("Usage: execute.exe <path to executable>");
+        println!("Usage: loader.exe <path to executable>");
         return;
     }
 
@@ -26,4 +26,7 @@ fn main() {
 
     let output = child.wait_with_output();
     println!("{:?}", output);
+
+    //debug
+    //std::io::stdin().read_line(&mut String::new()).unwrap();
 }
