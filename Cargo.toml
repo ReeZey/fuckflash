@@ -16,3 +16,4 @@ path = "src/execute.rs"
 retour = "0.3.1"
 winapi = { version = "0.3.9", features = ["consoleapi", "winuser"] }
 dll-syringe = "0.15.2"
+image = "0.25.4"
