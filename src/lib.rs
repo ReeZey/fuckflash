@@ -2,6 +2,7 @@ mod utils;
 
 use std::fs;
 use std::os::raw::c_void;
+use std::path::Path;
 use image::metadata::Orientation;
 use image::ColorType;
 use image::DynamicImage;
@@ -142,7 +143,7 @@ extern "system" fn window_proc_hook(
     }
 }
 
-static mut img_counter: i32 = 0;
+static mut IMG_COUNTER: i32 = 0;
 
 extern "system" fn set_dibits_hook(
     hdc: HDC,
@@ -161,7 +162,7 @@ extern "system" fn set_dibits_hook(
     unsafe {
         let original = SETDIBITS_DETOUR.as_mut().unwrap();
 
-        if !bmi.is_null() {
+        if !bmi.is_null() && Path::new("debug").is_dir() {
             let header = bmi.as_ref().unwrap();
             let aaa = header.bmiHeader.biWidth as u32;
             let bbb = header.bmiHeader.biHeight as u32;
@@ -178,8 +179,8 @@ extern "system" fn set_dibits_hook(
                 }
             }
             img.apply_orientation(Orientation::FlipVertical);
-            img.save(format!("debug/{}.png", img_counter)).unwrap();
-            img_counter += 1;
+            img.save(format!("debug/{}.png", IMG_COUNTER)).unwrap();
+            IMG_COUNTER += 1;
         }
 
         return original.call(hdc, x_dest, y_dest, width, height, x_src, y_src, start_scan, scan_lines, bits, bmi, color_use);
